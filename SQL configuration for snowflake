@@ -1,0 +1,38 @@
+DROP table store_data;
+
+CREATE OR REPLACE STORAGE INTEGRATION Snowflake_S3_Integration
+  TYPE = EXTERNAL_STAGE
+  STORAGE_PROVIDER = 'S3'
+  ENABLED = TRUE
+  STORAGE_AWS_ROLE_ARN = 'arn:aws:iam::460197340611:role/Snowflake_connection'
+  STORAGE_ALLOWED_LOCATIONS = ('s3://storgae-bucket-walmart/Transformed_data/Transformed_table.csv/Folder/')
+
+
+
+
+DESC integration Snowflake_S3_Integration;
+
+CREATE or REPLACE file format csv_format type = 'CSV' field_delimiter = ',' SKIP_HEADER = 1 null_if=('NULL','null') empty_field_as_null=true;
+
+
+
+CREATE or REPLACE STAGE Stage_Snowflake_S3_Integration
+  STORAGE_INTEGRATION = Snowflake_S3_Integration
+  URL = 's3://storgae-bucket-walmart/Transformed_data/Transformed_table.csv/Folder/'
+  FILE_FORMAT = csv_format;
+
+CREATE OR REPLACE TABLE store_data (
+    Store INT,
+    Date DATE,
+    Temperature DECIMAL(5,2),
+    Fuel_Price DECIMAL(5,3)
+);
+
+COPY INTO store_data
+  from @Stage_Snowflake_S3_Integration
+  file_format = 'csv_format'
+  on_error = 'continue';
+
+
+SELECT * FROM store_data;
+
