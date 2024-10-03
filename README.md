@@ -4,7 +4,7 @@ Creating Data Pipelines to perform ETL operation using walmart data set.
 **Tunneling tool:**  
 Tunneling tool I have used to establish connection between MySql and S3 using glue job is "ngrok"
 
-**Description of files in order:**
+**Description of files in order:**  
 **1) Glue job for walmart.py:** This is glue job script file used to extract data from MySQL to AWS S3 (extraction layer / bronze layer).  
 **2) walmart_transformation_notebook.ipynb:** This is a databricks notebook file where few queries of transformation operation are written in spark (results can be viewed in this notebook)  
 **3) walmart_transformation_notebook.py:** This is similar databricks notebook saved in python to check the code.  
