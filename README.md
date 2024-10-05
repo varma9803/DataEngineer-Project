@@ -16,4 +16,9 @@ Tunneling tool I have used to establish connection between MySql and S3 using gl
 **1) Netflix_analysis_Spark.py:** This is the python notebook file where queries are written in **spark sql** .  
 **2) Netflix_analysis_Spark.ipynb:** It is a similar python file in notebook format with results saved to be viewed.  
 **3) Netflix output data file:** It is a output file that is saved in **S3 which is further processed to Athena for querying by running glue crawlers.**  
-**4) Parquet netflix output data file:** This is the same output file saved in parquet format
+**4) Parquet netflix output data file:** This is the same output file saved in parquet format    
+**5) importmysql.py:** This Python code is used to test mysql connection.
+
+
+**Great Expectations:**  
+**1) ge_p1.ipynb:** This file is Great expectations python notebook which fetches data from local folder and also from AWS S3
